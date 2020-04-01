@@ -50,7 +50,7 @@ other devices record these reference-IDs until the device operator (user) needs 
 
 get the current status 
 
-![check status](/docs/img/getstatus.svg)
+![check status](/docs/img/getstatus2.svg)
 
 and never forget to be able to forget that status again.  
 
