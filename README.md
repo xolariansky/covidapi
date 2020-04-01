@@ -4,6 +4,7 @@ A specification on a "common ground" for multiple covid-contact-...-apps.
 Providing a "unified" backend for leveraging on the larger user base. 
 
 ### introduction
+the road so far
 
 After having some look into other bluetooth / code based systems I found that they are not far apart in the basic aspects.
 Sometimes the different apps seemed to add a lot of additional features, though requiring a full scale adoption, leaving users no CHOICE!
@@ -39,11 +40,11 @@ By verification of certificates this can be changed with no or little changes in
 
 #### basic mode of operation
 
-devices generate new JWE messages for their UUID and advertise those 
+devices generate new JWE based reference-IDs of their UUID and advertise then via BT 
  
 ![advertise unique ids (you could renew that like always) ](/docs/img/blehdah.svg)
 
-other devices record these UUIDs until the device operator (user) needs to disseminate a status message 
+other devices record these reference-IDs until the device operator (user) needs to disseminate a status message 
 
 ![distribute status message](/docs/img/poststatus.svg)
 
@@ -80,3 +81,5 @@ and never forget to be able to forget that status again.
      * there are alternatives for parts
      * with JOSE you can do a lot wrong and the hackish way of utilizing JWE for reference-IDs is certainly no intended use   
         
+        
+-----
