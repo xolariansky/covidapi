@@ -1,19 +1,41 @@
 ## covidapi
 
-specifying a common specification for multiple covid tracking apps to include and leverage on the large user base and "unified" backend
+A specification on a "common ground" for multiple covid-contact-...-apps.
+Providing a "unified" backend for leveraging on the larger user base. 
 
-### goals
+### introduction
 
-* distribute covid-status
-* protect against flooding / make idempotent  
-* distribute verification message 
-* grant access to message only if user is verified 
+After having some look into other bluetooth / code based systems I found that they are not far apart in the basic aspects.
+Sometimes the different apps seemed to add a lot of additional features, though requiring a full scale adoption, leaving users no CHOICE!
+So after digesting all the input I created a "common ground" specification. As I believe only a global effort can make this worthwhile. 
+However in my opinion a centralized approach will never fly internationally in terms of politics and scalability. 
+
+### basic goals
+
+* support a federated architecture
+* distribute covid-status message to "acquaintances" without revealing your own identity
+* offer authorities the means of distributing authenticated status information    
+* grant access to status-message only to the specific app/user  
+* make tracking of users very difficult 
 
 #### side goals
 
-* support a decentralized server architecture
+* do not hinder efficient scaling
+* stay extensible to additional features
+* leverage on well known standards
+* offer a (authority) gated status "reset"  
 
 ### concept
+
+Making it possible for multiple systems to coexist in a federated approach utilizing a cascading message distribution. 
+
+Permanently change the advertised reference-IDs by utilizing encryption with random IVs.  
+Encrypting the UUID with the apps "home-server" public key makes it possible to efficiently map it to the UUID on the servers side, when they get pushed.
+Using JOSE (RFC 7518, RFC 7516, RFC 7517, RFC 7519) as central PKI "standard" for exchanging encrypted, anonymous and verified messages.                 
+
+Authorities may choose to hold the privilege of generating tokens (JWT) at their discretion. Making it improbable to disseminate "fake" status messages in the first place. Or in a more liberal way the message can be submitted unverified.    
+In the end the JWT-id may be associated with official documentation on authorities level or have no association at all. 
+By verification of certificates this can be changed with no or little changes in code.       
 
 #### basic mode of operation
 
@@ -21,7 +43,7 @@ devices generate new JWE messages for their UUID and advertise those
  
 ![advertise unique ids (you could renew that like always) ](/docs/img/blehdah.svg)
 
-other devices record these UUIDs until the device operator needs to disseminate a status message 
+other devices record these UUIDs until the device operator (user) needs to disseminate a status message 
 
 ![distribute status message](/docs/img/poststatus.svg)
 
@@ -29,7 +51,7 @@ get the current status
 
 ![check status](/docs/img/getstatus.svg)
 
-and never forget to forget that status again, dah  
+and never forget to be able to forget that status again.  
 
 ![delete status](/docs/img/deletestatus.svg)
 
@@ -49,9 +71,12 @@ and never forget to forget that status again, dah
   * the server should store and offer the JWT ID , making it possible to track fraud
   
 
-### TODO
+### open questions
 
 * maybe specify reduced JWE-like token that include enough features for privacy keeping IDs. e.g. JWI
   * e.g. ditching CEK, directly asymmetrically encrypting the UUID
-     
 
+* is there an *adequate* alternative to JOSE?!  
+     * there are alternatives for parts
+     * with JOSE you can do a lot wrong and the hackish way of utilizing JWE for reference-IDs is certainly no intended use   
+        

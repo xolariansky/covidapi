@@ -47,7 +47,7 @@ paths:
         '404':
           description: Not Found
           schema: {}
-      description: 'clear status, may need a different token authorithy '
+      description: 'clear status, may need a different token authority '
       parameters:
         - type: string
           in: header
@@ -88,9 +88,9 @@ paths:
           schema:
             type: object
             properties:
-              ids:
+              refids:
                 type: array
-                description: JWEs the device saw
+                description: JWE ref-IDs the device saw
                 minItems: 1
                 items:
                   type: string
