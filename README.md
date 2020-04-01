@@ -37,11 +37,11 @@ and never forget to forget that status again, dah
 
 * proximity notification suppression whitelist   
   * you could design your app to include recognizable features in the public header
-  * or use multiple CKEs (yes that might increase the JWEs size, so be careful)
-  * this might also weaken privacy!
-
+  * share a fixed CEK or share a generation pattern/seed 
+  * or use additional CEKs, utilizing the general JWE serialization with multiple recipients (RFC_7516 7.2) 
+  
 * push notification
-  * simple as that, you register your ID and push token with your server
+  * simple as that, you register your UUID and push token with your server
   
 * disseminate only "verified" information
   * you are free to distrust / trust any tokens you might like
@@ -52,5 +52,6 @@ and never forget to forget that status again, dah
 ### TODO
 
 * maybe specify reduced JWE-like token that include enough features for privacy keeping IDs. e.g. JWI
-  * e.g. ditching CKE, allowing 
+  * e.g. ditching CEK, directly asymmetrically encrypting the UUID
+     
 

@@ -1,7 +1,8 @@
 swagger: '2.0'
 info:
   title: covidapi
-  version: '1.0'
+  version: '0.1'
+  description: ''
 host: 'localhost:3000'
 schemes:
   - https
@@ -10,9 +11,9 @@ produces:
 consumes:
   - application/json
 paths:
-  '/status/{seedid}':
+  '/status/{uuid}':
     get:
-      summary: Your GET endpoint
+      summary: ''
       tags: []
       responses:
         '200':
@@ -23,7 +24,7 @@ paths:
               message:
                 type: string
                 description: 'JWE message from an authority '
-                pattern: '^[-A-Za-z0-9+=.]+$'
+                pattern: '^[-A-Za-z0-9+=_.]+$'
               tokenid:
                 type: string
                 description: 'signaling token id, utilized in the event of abuse '
@@ -34,15 +35,6 @@ paths:
           schema: {}
       operationId: get-status
       description: 'returns the current status '
-    parameters:
-      - type: string
-        name: seedid
-        in: path
-        description: 'reference uuid used in encrypted ids '
-        maxLength: 0
-        minLength: 0
-        pattern: '^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$'
-        required: true
     delete:
       summary: ''
       operationId: delete-status
@@ -62,7 +54,16 @@ paths:
           name: Authorization
           required: true
           description: deletion token
-          pattern: '^[-A-Za-z0-9+=.]+$'
+          pattern: '^[-A-Za-z0-9+=_.]+$'
+    parameters:
+      - type: string
+        name: uuid
+        in: path
+        description: 'reference uuid used in encrypted ids '
+        maxLength: 0
+        minLength: 0
+        pattern: '^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$'
+        required: true
   /status:
     post:
       summary: ''
@@ -81,7 +82,7 @@ paths:
           name: Authorization
           required: true
           description: 'JWT one time validity! '
-          pattern: '^[-A-Za-z0-9+=.]+$'
+          pattern: '^[-A-Za-z0-9+=_.]+$'
         - in: body
           name: body
           schema:
@@ -93,10 +94,10 @@ paths:
                 minItems: 1
                 items:
                   type: string
-                  pattern: '^[-A-Za-z0-9+=.]+$'
+                  pattern: '^[-A-Za-z0-9+=_.]+$'
               message:
                 type: string
-                pattern: '^[-A-Za-z0-9+=.]+$'
+                pattern: '^[-A-Za-z0-9+=_.]+$'
                 description: JWE with a nice message from some authorithy
             required:
               - ids
@@ -104,19 +105,19 @@ paths:
       description: "commit your seen device ids \ncascade with other services -> tokenid based idempotency "
   /.well-known/jwks.json:
     get:
-      summary: Your GET endpoint
+      summary: ''
       tags: []
       responses:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/jsonwebkeys'
+            $ref: '#/definitions/jsonwebkeyset'
       operationId: get-publickeys
       description: 'returns all well known public keys '
     parameters: []
   /token:
     get:
-      summary: Your GET endpoint
+      summary: ''
       tags: []
       responses:
         '200':
@@ -124,35 +125,41 @@ paths:
           schema:
             type: string
             description: JWT-token ;)
-            pattern: '^[-A-Za-z0-9+=.]+$'
+            pattern: '^[-A-Za-z0-9+=_.]+$'
         '500':
           description: Internal Server Error
           schema: {}
       operationId: get-token
       description: 'returns a simple token, spice it up with the surveilance and authority you like.'
 definitions:
-  jsonwebkeys:
-    type: array
-    description: list of keys
-    items:
-      type: object
-      description: json web key
-      properties:
-        'n':
-          type: string
-          description: modulus
-        e:
-          type: string
-          description: exponent
-        kty:
-          type: string
-          description: ktype
-        alg:
-          type: string
-          description: alorithm
-        kid:
-          type: string
-          description: keyid
-      required:
-        - kty
-        - kid
+  jsonwebkeyset:
+    type: object
+    properties:
+      keys:
+        description: list of keys
+        type: array
+        items:
+          type: object
+          description: json web key
+          properties:
+            'n':
+              type: string
+              description: modulus
+            e:
+              type: string
+              description: exponent
+            kty:
+              type: string
+              description: ktype
+            alg:
+              type: string
+              description: alorithm
+            kid:
+              type: string
+              description: keyid
+            k:
+              type: string
+              description: key
+          required:
+            - kty
+            - kid
