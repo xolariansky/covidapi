@@ -39,7 +39,7 @@ Making it possible for multiple systems to coexist in a federated approach utili
 
 Permanently change the advertised reference-IDs by utilizing encryption with random IVs.  
 Encrypting the UUID with the apps "home-server" public key makes it possible to efficiently map it to the UUID on the servers side, when they get pushed.
-Using JOSE (RFC 7518, RFC 7516, RFC 7517, RFC 7519) as central PKI "standard" for exchanging encrypted, anonymous and verified messages.                 
+Using JOSE (RFC 7516, RFC 7517, RFC 7518, RFC 7519) as central PKI "standard" for exchanging encrypted, anonymous and verified messages.                 
 
 Authorities may choose to hold the privilege of generating tokens (JWT) at their discretion. Making it improbable to disseminate "fake" status messages in the first place. Or in a more liberal way the message can be submitted unverified.    
 In the end the JWT-id may be associated with official documentation on authorities level or have no association at all. 
@@ -47,7 +47,7 @@ By verification of certificates this can be changed with no or little changes in
 
 #### basic mode of operation
 
-devices generate new JWE based reference-IDs of their UUID and advertise then via BT 
+devices generate new JWE (JSON Web Encryption) based reference-IDs of their UUID and advertise then via BT 
  
 ![advertise unique ids (you could renew that like always) ](/docs/img/blehdah.svg)
 
@@ -77,6 +77,10 @@ and never forget to be able to forget that status again.
   * you are free to distrust / trust any tokens you might like
   * on what basis the tokens are generated is irrelevant and might include intensive tracking and verification (e.g. Personal-ID-ID)    
   * the server should store and offer the JWT ID , making it possible to track fraud
+  
+* the JWE could include an extended payload 
+  * for example a hmac of the uuid including a device secret could be used to verify validity of presence and present this in the get-status request         
+  
   
 ### open questions
 
