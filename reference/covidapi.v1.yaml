@@ -121,7 +121,7 @@ paths:
     get:
       summary: ''
       tags:
-        - authorithy
+        - authority
       responses:
         '200':
           description: OK
