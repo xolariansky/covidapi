@@ -1,24 +1,31 @@
-## covidapi
+## covidapi [DRAFT]
 
-A specification on a "common ground" for multiple covid-contact-...-apps.
+A specification on a "common ground" for multiple pandemic-contact-tracking-apps.
 Providing a "unified" backend for leveraging on the larger user base. 
+
+**the e-mail-standard for pandemic tracking**   
 
 ### introduction
 the road so far
 
-After having some look into other bluetooth / code based systems I found that they are not far apart in the basic aspects.
-Sometimes the different apps seemed to add a lot of additional features, though requiring a full scale adoption, leaving users no CHOICE!
-So after digesting all the input I created a "common ground" specification. As I believe only a global effort can make this worthwhile. 
-However in my opinion a centralized approach will never fly internationally in terms of politics and scalability. 
+After having some look into several bluetooth / code based systems I found that they are not far apart in the basic aspects.
+Sometimes the different apps seemed to add a lot of additional features. 
+However for them to be successful they would  require a full scale adoption, making a single solution unlikely. 
+
+Also the outlook of a single "government chosen" or a centralized tracking architecture did not appeal to me.    
+In my opinion a centralized approach will never fly internationally in terms of politics and scalability. (let alone nationally)
+
+So after digesting all the input I created a "common ground" specification. 
+As I believe only a global and cooperative effort is the way to ensure the best outcome. 
 
 ### basic goals
 
 * support a federated architecture
 * distribute covid-status message to "acquaintances" without revealing your own identity
-* offer authorities the means of distributing authenticated status information    
+* offer authorities the means of distributing authenticated status information, but otherwise authority agnostic    
 * grant access to status-message only to the specific app/user  
-* make tracking of users very difficult 
-
+* make illicit tracking of users severely difficult
+ 
 #### side goals
 
 * do not hinder efficient scaling
@@ -56,7 +63,7 @@ and never forget to be able to forget that status again.
 
 ![delete status](/docs/img/deletestatus.svg)
 
-#### extensions
+#### extensions / ideas
 
 * proximity notification suppression whitelist   
   * you could design your app to include recognizable features in the public header
@@ -71,7 +78,6 @@ and never forget to be able to forget that status again.
   * on what basis the tokens are generated is irrelevant and might include intensive tracking and verification (e.g. Personal-ID-ID)    
   * the server should store and offer the JWT ID , making it possible to track fraud
   
-
 ### open questions
 
 * maybe specify reduced JWE-like token that include enough features for privacy keeping IDs. e.g. JWI
