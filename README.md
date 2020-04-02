@@ -91,7 +91,7 @@ and never forget to be able to forget that status again.
      * there are alternatives for parts
      * with JOSE you can do a lot wrong and the hackish way of utilizing JWE for reference-IDs is certainly no intended use   
         
-* thesis: privacy is increased the more app providers join in.
+* thesis: privacy is increased the more app vendors join in.
    * tbd  
         
 -----
