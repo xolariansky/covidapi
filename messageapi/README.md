@@ -72,15 +72,15 @@ The service MAY notify the user about the update
 
 Devices generate new encrypted-random-address (ERA) of their IDs and advertise them in a particular way. App vendors/operators take care of the process of doing so.   
  
-![advertise unique ids (you could renew that like always) ](/docs/img/blehdah2.svg)
+![advertise unique ids (you could renew that like always) ](docs/img/blehdah2.svg)
 
 Other devices record these ERAs until the user needs to disseminate a status message 
 
-![distribute status message](/docs/img/poststatus2.svg)
+![distribute status message](docs/img/poststatus2.svg)
 
 Get your current status! 
 
-![check status](/docs/img/getstatus3.svg)
+![check status](docs/img/getstatus3.svg)
 
  
 ### ideas
